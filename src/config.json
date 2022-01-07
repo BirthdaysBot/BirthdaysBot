@@ -1,3 +1,4 @@
 {
-    "BOT_TOKEN": "The Discord bot token"
+    "BOT_TOKEN": "The Discord bot token",
+    "PREFIX": "The prefix for text/prefix commands"
 }

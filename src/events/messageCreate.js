@@ -1,0 +1,24 @@
+const Discord = require("discord.js");
+
+module.exports = {
+    name: "messageCreate",
+    /**
+     * 
+     * @param {Discord.Client} client The Discord client.
+     * @param {Discord.Message} message The message.
+     * @returns 
+     */
+    run: async (client, message) => {
+        if (!message.content.startsWith(client.globalConfig.PREFIX)) return;
+        if (message.channel.type != "GUILD_TEXT") return;
+
+        const args = message.content.slice(client.globalConfig.PREFIX.length).trim().split(" ");
+        const command = args.shift().toLowerCase();
+
+        if (!client.commands.get(command)) return;
+
+        if (["BOTH", "TEXT"].includes(command.type)) {
+            client.commands.get(command).run(client, message, args);
+        }
+    }
+}
