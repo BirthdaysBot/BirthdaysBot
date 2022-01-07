@@ -1,1 +1,11 @@
-console.log("test");
+const Discord = require("discord.js");
+const intents = new Discord.Intents(513);
+const Client = new Discord.Client({ intents });
+
+Client.globalConfig = require("./config.json");
+Client.commands = new Discord.Collection();
+
+require("./utils/commands")(Client);
+require("./utils/events")(Client);
+
+Client.login(Client.globalConfig.BOT_TOKEN);
