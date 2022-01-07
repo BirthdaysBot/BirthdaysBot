@@ -1,4 +1,11 @@
 {
     "BOT_TOKEN": "The Discord bot token",
-    "PREFIX": "The prefix for text/prefix commands"
+    "PREFIX": "The prefix for text/prefix commands",
+    "db": {
+        "user": "The database user",
+        "host": "The database host",
+        "database": "The database",
+        "password": "The password to the database",
+        "port": "The database port"
+    }
 }
