@@ -14,6 +14,13 @@ module.exports = async (client) => {
     for (const file of commands) {
         const command = require(`../commands/${file}`);
 
-        client.commands.set(command.name, command);
+        if (command.type == "TEXT") {
+            client.commands.set(command.name, command);
+        } else if (command.type == "BOTH") {
+            client.commands.set(command.name, command);
+            client.slashCommands.set(command.name, command);
+        } else if (command.type == "SLASH") {
+            client.slashCommands.set(command.name, command);
+        }
     }
 }
