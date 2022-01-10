@@ -27,13 +27,18 @@ module.exports = (page, per_page, birthdays, personRequesting) => {
     for (var i = 0; i < birthdays.length; i++) {
         let birthday = birthdays[i]
 
+        const checkUndefined = (key) => {
+            if (key == undefined) return undefined;
+            else return key;
+        }
+
         array.push({
             user_id: birthday.user_id,
             user_name: birthday.user_name,
             day: birthday.day,
             month: birthday.month,
             year: birthday.year,
-            opted_out: birthday.opted_out
+            opted_out: checkUndefined(birthday.opted_out)
         });
         num++;
     }
