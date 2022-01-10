@@ -40,7 +40,7 @@ module.exports = {
 
             const collector = message.channel.createMessageCollector({ filter, time: 30000 });
 
-            message.reply("The bot will be storing your birthday in its database. To remove it from the bot's database run `!delete-birthday`.\n\nAre you sure you want to proceed? (`Yes`/`No`)");
+            message.reply("The bot will be storing your birthday in its database. To remove it from the bot's database run `!delete-birthday`.\n\nAre you sure you want to proceed? (`Yes`/`No`)\nThis message expires in 30 seconds.");
 
             collector.on("collect", (m) => {
                 if (m.content.toLowerCase() == "yes") {
