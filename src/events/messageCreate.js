@@ -17,7 +17,7 @@ module.exports = {
 
         if (!client.commands.get(command)) return;
 
-        if (["BOTH", "TEXT"].includes(command.type)) {
+        if (["BOTH", "TEXT"].includes(client.commands.get(command).type)) {
             client.commands.get(command).run(client, message, args);
         }
     }

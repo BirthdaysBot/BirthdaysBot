@@ -1,11 +1,21 @@
 const Discord = require("discord.js");
+const Birthday = require("../models/Birthday");
 
 module.exports = {
     name: "ping",
     description: "Shows the bot's ping.",
-    type: "BOTH",
+    adminOnly: false,
+    type: "TEXT",
     slashCommandOptions: [],
     run: async (client, message, args) => {
-        message.reply(`:ping_pong: Pong! ${client.ws.ping} ms.`);
+        const dateNow = Date.now();
+
+        await Birthday.find({}).then(() => {
+            const dateAfter = Date.now();
+
+            message.reply(`:ping_pong: Pong!\n\nWebsocket Ping: ${client.ws.ping} ms\nDatabase Ping: ${dateAfter - dateNow} ms`);
+        }).catch(error => {
+            message.reply(`:ping_pong: Pong!\n\nWebsocket Ping: ${client.ws.ping} ms\nDatabase Ping: Error`);
+        });
     }
 }

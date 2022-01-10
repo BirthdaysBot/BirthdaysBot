@@ -1,0 +1,12 @@
+{
+    "BOT_TOKEN": "The Discord bot token",
+    "PREFIX": "The prefix for text/prefix commands",
+    "DBH_API_KEY": "The api key for DanBot Hosting's bot api",
+    "db": {
+        "user": "The database user",
+        "host": "The database host",
+        "database": "The database name",
+        "password": "The password to the database",
+        "port": "The database port"
+    }
+}
