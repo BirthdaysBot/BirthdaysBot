@@ -23,37 +23,50 @@ module.exports = {
     type: "TEXT",
     slashCommandOptions: [],
     run: async (client, message, args) => {
-        const day = args[0];
-        const month = args[1];
-        const year = args[2] || "0000";
-
-        if (!day || isNaN(parseInt(day)) || parseInt(day) > 31) return message.reply("Please input a day. ex: 23");
-        if (!month || !months[month.toLowerCase()]) return message.reply("Please input a month. ex: July");
-        if (parseInt(year) > 2022 || parseInt(year) < 1982) return message.reply("The year cannot be greater than 2022 or less than 1982.");
-
         const findBirthday = await Birthday.findOne({ user_id: message.author.id });
 
         if (findBirthday) {
             return message.reply("Your birthday is already saved in the bot!");
         } else {
-            new Birthday({
-                user_id: message.author.id,
-                user_name: message.author.username,
-                day: parseInt(day),
-                month: months[month.toLowerCase()],
-                year: parseInt(year)
-            }).save().then(document => {
-                const embed = new Discord.MessageEmbed();
+            const day = args[0];
+            const month = args[1];
+            const year = args[2] || "0000";
 
-                embed.setTitle(":birthday: Birthday added!");
-                embed.setThumbnail(client.user.avatarURL());
-                embed.setColor("RANDOM");
-                embed.setDescription(`A new birthday has been added to the bot for ${message.author.username}!\n\n${document.day} ${toUpper(month)}, ${document.year}`);
-                embed.setTimestamp();
+            if (!day || isNaN(parseInt(day)) || parseInt(day) > 31) return message.reply("Please input a day. ex: 23");
+            if (!month || !months[month.toLowerCase()]) return message.reply("Please input a month. ex: July");
+            if (parseInt(year) > 2022 || parseInt(year) < 1982) return message.reply("The year cannot be greater than 2022 or less than 1982.");
 
-                message.reply({ embeds: [embed] });
-            }).catch(error => {
-                message.reply("An error occured while trying to save your birthday to the bot's database, please try again later.");
+            const filter = (m) => m.author.id == message.author.id;
+
+            const collector = message.channel.createMessageCollector({ filter, time: 30000 });
+
+            message.reply("The bot will be storing your birthday in its database. To remove it from the bot's database run `!delete-birthday`.\n\nAre you sure you want to proceed? (`Yes`/`No`)");
+
+            collector.on("collect", (m) => {
+                if (m.content.toLowerCase() == "yes") {
+                    new Birthday({
+                        user_id: message.author.id,
+                        user_name: message.author.username,
+                        day: parseInt(day),
+                        month: months[month.toLowerCase()],
+                        year: parseInt(year)
+                    }).save().then(document => {
+                        const embed = new Discord.MessageEmbed();
+
+                        embed.setTitle(":birthday: Birthday added!");
+                        embed.setThumbnail(client.user.avatarURL());
+                        embed.setColor("RANDOM");
+                        embed.setDescription(`A new birthday has been added to the bot for ${message.author.username}!\n\n${document.day} ${toUpper(month)}, ${document.year}`);
+                        embed.setTimestamp();
+
+                        message.reply({ embeds: [embed] });
+                    }).catch(error => {
+                        message.reply("An error occured while trying to save your birthday to the bot's database, please try again later.");
+                    });
+                } else {
+                    collector.stop();
+                    return;
+                }
             });
         }
     }
