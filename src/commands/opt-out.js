@@ -18,15 +18,15 @@ module.exports = {
             if (!enabled || !["yes", "no"].includes(enabled)) return message.reply("Please input `yes` or `no`.");
 
             if (enabled == "yes") {
-                await Birthday.findOneAndUpdate({ user_id: message.author.id }, {
+                Birthday.findOneAndUpdate({ user_id: message.author.id }, {
                     opted_out: true
-                }, {}, (error, document) => {
+                }, function (error, document) {
                     message.reply("You're now opted out of the birthdays list.");
                 });
             } else if (enabled == "no") {
                 await Birthday.findOneAndUpdate({ user_id: message.author.id }, {
                     opted_out: false
-                }, {}, (error, document) => {
+                }, function (error, document) {
                     message.reply("You're now opted in to the birthdays list.");
                 });
             }
