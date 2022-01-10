@@ -27,7 +27,14 @@ module.exports = (page, per_page, birthdays, personRequesting) => {
     for (var i = 0; i < birthdays.length; i++) {
         let birthday = birthdays[i]
 
-        array.push({ user_id: birthday.user_id, user_name: birthday.user_name, day: birthday.day, month: birthday.month, year: birthday.year });
+        array.push({
+            user_id: birthday.user_id,
+            user_name: birthday.user_name,
+            day: birthday.day,
+            month: birthday.month,
+            year: birthday.year,
+            opted_out: birthday.opted_out
+        });
         num++;
     }
 
@@ -60,6 +67,8 @@ module.exports = (page, per_page, birthdays, personRequesting) => {
     let content = "";
 
     for (var i = 0; i < end.data.length; i++) {
+        if (end.data[i].opted_out == true) return;
+
         let startDate = new Date();
         let birthDate = new Date(`${toUpper(months[end.data[i].month])} ${end.data[i].day}, ${new Date().getFullYear()}`);
 
