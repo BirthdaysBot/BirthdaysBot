@@ -34,6 +34,7 @@ module.exports = {
 
             if (!day || isNaN(parseInt(day)) || parseInt(day) > 31) return message.reply("Please input a day. ex: 23");
             if (!month || !months[month.toLowerCase()]) return message.reply("Please input a month. ex: July");
+            if (isNaN(parseInt(year))) return message.reply("The year must be a number.");
             if (parseInt(year) > 2022 || parseInt(year) < 1982) return message.reply("The year cannot be greater than 2022 or less than 1982.");
 
             const filter = (m) => m.author.id == message.author.id;
@@ -61,6 +62,7 @@ module.exports = {
 
                         message.reply({ embeds: [embed] });
                     }).catch(error => {
+                        console.log(error);
                         message.reply("An error occured while trying to save your birthday to the bot's database, please try again later.");
                     });
                 } else {
