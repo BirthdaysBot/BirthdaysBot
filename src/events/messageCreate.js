@@ -11,6 +11,7 @@ module.exports = {
     run: async (client, message) => {
         if (!message.content.startsWith(client.globalConfig.PREFIX)) return;
         if (message.channel.type != "GUILD_TEXT") return;
+        if (!message.guild.me.permissions.has("SEND_MESSAGES") || !message.channel.permissionsFor(message.guild.me).has('SEND_MESSAGES')) return;
 
         const args = message.content.slice(client.globalConfig.PREFIX.length).trim().split(" ");
         const command = args.shift().toLowerCase();

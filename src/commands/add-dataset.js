@@ -25,13 +25,11 @@ module.exports = {
     run: async (client, message, args) => {
         if (message.author.id != "716761186812821604") return;
         const userId = args[0];
-        const userName = args[1];
-        const day = args[2];
-        const month = args[3];
-        const year = args[4] || "0000";
+        const day = args[1];
+        const month = args[2];
+        const year = args[3] || "0000";
 
         if (!userId) return message.reply("Please input a user ID.");
-        if (!userName) return message.reply("please input a user name.");
         if (!day || isNaN(parseInt(day))) return message.reply("Please input a day. ex: 23");
         if (!month || !months[month.toLowerCase()]) return message.reply("Please input a month. ex: July");
 
@@ -42,7 +40,19 @@ module.exports = {
         } else {
             new Birthday({
                 user_id: userId,
-                user_name: userName,
+                user_name: (async () => {
+                    let user = client.users.cache.get(userId);
+
+                    if (!user) {
+                        await client.users.fetch(userId).then(user => {
+                            user = user;
+                        });
+
+                        return user.username;
+                    } else {
+                        return user.username;
+                    }
+                })(),
                 day: parseInt(day),
                 month: months[month.toLowerCase()],
                 year: parseInt(year)

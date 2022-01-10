@@ -9,7 +9,12 @@ module.exports = {
      * @param {Discord.Client} client The Discord client.
      */
     run: async (client) => {
-        client.application.commands.set(client.slashCommands);
+        console.log(client.user.tag + " is online!");
+        client.guilds.cache.forEach(guild => {
+            console.log(`${guild.name} - Members: ${guild.memberCount} Bots: ${guild.members.cache.filter(user => !user.bot).size.toLocaleString()}`);
+        });
+
+        // client.application.commands.set(client.slashCommands);
 
         const dbConfig = client.globalConfig.db;
 

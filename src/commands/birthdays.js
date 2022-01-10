@@ -27,7 +27,7 @@ module.exports = {
 
                 return a.day - b.day;
             });
-            let per_page = 5;
+            let per_page = 20;
             let total_pages = Math.ceil(bdays.length / per_page);
 
             if (page > total_pages) page = total_pages;
