@@ -1,4 +1,4 @@
 node_modules
 .gitattributes
 package-lock.json
-src\config.json
+src/config.json
