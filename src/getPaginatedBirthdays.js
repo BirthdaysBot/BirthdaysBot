@@ -72,7 +72,7 @@ module.exports = (page, per_page, birthdays, personRequesting) => {
     let content = "";
 
     for (var i = 0; i < end.data.length; i++) {
-        if (end.data[i].opted_out == true) return;
+        if (end.data[i].opted_out == true) continue;
 
         let startDate = new Date();
         let birthDate = new Date(`${toUpper(months[end.data[i].month])} ${end.data[i].day}, ${new Date().getFullYear()}`);
