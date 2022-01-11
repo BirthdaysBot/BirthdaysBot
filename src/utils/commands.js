@@ -13,7 +13,7 @@ module.exports = (client) => {
 
     client.commands = COMMANDS
         .filter(command => ["BOTH", "TEXT"].includes(command.type))
-        .forEach(command => require(`../commands/${command}`));
+        .forEach(command => require(`../commands/${command.name}`));
 
     client.slashCommands = COMMANDS
         .filter(command => ["BOTH", "SLASH"].includes(command.type))
