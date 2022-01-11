@@ -5,7 +5,7 @@ module.exports = {
     name: "ping",
     description: "Shows the bot's ping.",
     adminOnly: false,
-    type: "TEXT",
+    type: "BOTH",
     slashCommandOptions: [],
     run: async (client, message, args) => {
         const dateNow = Date.now();

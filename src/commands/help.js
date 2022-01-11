@@ -4,7 +4,7 @@ module.exports = {
     name: "help",
     description: "Shows the help menu for the bot.",
     adminOnly: false,
-    type: "TEXT",
+    type: "BOTH",
     slashCommandOptions: [],
     run: async (client, message, args) => {
         /**

@@ -5,7 +5,7 @@ module.exports = {
     name: "botinfo",
     description: "Shows information about the bot.",
     adminOnly: false,
-    type: "TEXT",
+    type: "BOTH",
     slashCommandOptions: [],
     run: async (client, message, args) => {
         const embed = new Discord.MessageEmbed();
