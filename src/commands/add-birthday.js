@@ -23,7 +23,11 @@ module.exports = {
     type: "TEXT",
     slashCommandOptions: [],
     run: async (client, message, args) => {
-        const findBirthday = await Birthday.findOne({ user_id: message.author.id });
+        const findBirthday = await Birthday.findOne({ user_id: message.author.id }).catch(error => {
+            console.log(error);
+
+            return message.reply("An error occured, please try again later.");
+        });
 
         if (findBirthday) {
             return message.reply("Your birthday is already saved in the bot!");
@@ -66,6 +70,7 @@ module.exports = {
                         message.reply("An error occured while trying to save your birthday to the bot's database, please try again later.");
                     });
                 } else {
+                    message.reply("Canceled!");
                     collector.stop();
                     return;
                 }

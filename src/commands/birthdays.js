@@ -43,7 +43,7 @@ module.exports = {
             message.reply({ embeds: [embed] });
         } catch (error) {
             console.log(error);
-            message.reply("An error occured while trying to make the birthdays list, please try again later.");
+            message.reply("An error occured, please try again later.");
         }
     }
 }

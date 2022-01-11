@@ -13,7 +13,11 @@ module.exports = {
 
         if (!userId) return message.reply("Please input a user ID.");
 
-        const findBirthday = await Birthday.findOne({ user_id: userId });
+        const findBirthday = await Birthday.findOne({ user_id: userId }).catch(error => {
+            console.log(error);
+
+            return message.reply("An error occured, please try again later.");
+        });
 
         if (!findBirthday) {
             return message.reply("The birthday does not exist in the bot's database!");
@@ -28,6 +32,10 @@ module.exports = {
                 embed.setTimestamp();
 
                 message.reply({ embeds: [embed] });
+            }).catch(error => {
+                console.log(error);
+
+                return message.reply("An error occured, please try again later.");
             });
         }
     }

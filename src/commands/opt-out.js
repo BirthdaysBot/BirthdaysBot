@@ -8,7 +8,11 @@ module.exports = {
     type: "TEXT",
     slashCommandOptions: [],
     run: async (client, message, args) => {
-        const findBirthday = await Birthday.findOne({ user_id: message.author.id });
+        const findBirthday = await Birthday.findOne({ user_id: message.author.id }).catch(error => {
+            console.log(error);
+
+            return message.reply("An error occured, please try again later.");
+        });
 
         if (!findBirthday) {
             return message.reply("You don't have a birthday saved in the bot!");
@@ -37,10 +41,17 @@ function update(message, key, value) {
     Birthday.findOneAndUpdate({ user_id: key }, {
         opted_out: value
     }, function (error, document) {
+        if (error) console.log(error);
+        if (error) return message.reply("An error occured, please try again later.");
+
         if (value == true) {
             message.reply("You're now opted out of the birthdays list.");
         } else if (value == false) {
             message.reply("You're now opted in to the birthdays list.");
         }
+    }).catch(error => {
+        console.log(error);
+
+        return message.reply("An error occured, please try again later.");
     });
 }

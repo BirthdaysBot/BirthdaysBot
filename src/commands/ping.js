@@ -15,6 +15,7 @@ module.exports = {
 
             message.reply(`:ping_pong: Pong!\n\nWebsocket Ping: ${client.ws.ping} ms\nDatabase Ping: ${dateAfter - dateNow} ms`);
         }).catch(error => {
+            console.log(error);
             message.reply(`:ping_pong: Pong!\n\nWebsocket Ping: ${client.ws.ping} ms\nDatabase Ping: Error`);
         });
     }

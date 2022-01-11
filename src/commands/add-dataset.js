@@ -33,7 +33,11 @@ module.exports = {
         if (!day || isNaN(parseInt(day))) return message.reply("Please input a day. ex: 23");
         if (!month || !months[month.toLowerCase()]) return message.reply("Please input a month. ex: July");
 
-        const findBirthday = await Birthday.findOne({ user_id: userId });
+        const findBirthday = await Birthday.findOne({ user_id: userId }).catch(error => {
+            console.log(error);
+
+            return message.reply("An error occured, please try again later.");
+        });
 
         if (findBirthday) {
             return message.reply("The birthday is already saved in the bot!");
@@ -66,6 +70,10 @@ module.exports = {
                 embed.setTimestamp();
 
                 message.reply({ embeds: [embed] });
+            }).catch(error => {
+                console.log(error);
+
+                return message.reply("An error occured, please try again later.");
             });
         }
     }
