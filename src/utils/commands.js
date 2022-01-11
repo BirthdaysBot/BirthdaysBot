@@ -9,7 +9,7 @@ const Discord = require("discord.js");
 module.exports = async (client) => {
     const COMMAND_FILES = await fs.readdirSync("src/commands").filter(file => file.endsWith(".js"));
 
-    const COMMANDS = COMMAND_FILES.map(file => require(`./commands/${file}`));
+    const COMMANDS = COMMAND_FILES.map(file => require(`../commands/${file}`));
 
     client.commands = COMMANDS
         .filter(command => ["BOTH", "TEXT"].includes(command.type))
