@@ -14,7 +14,7 @@ module.exports = {
             console.log(`[GUILDS] ${guild.name} - Members: ${guild.memberCount} Bots: ${guild.members.cache.filter(user => !user.bot).size.toLocaleString()}`);
         });
 
-        client.application.commands.set(client.slashCommands);
+        await client.application.commands.set(client.slashCommands);
 
         const dbConfig = client.globalConfig.db;
 
