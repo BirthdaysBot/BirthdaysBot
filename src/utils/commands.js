@@ -6,8 +6,8 @@ const Discord = require("discord.js");
  * 
  * @param {Discord.Client} client The Discord client.
  */
-module.exports = async (client) => {
-    const COMMAND_FILES = await fs.readdirSync("src/commands").filter(file => file.endsWith(".js"));
+module.exports = (client) => {
+    const COMMAND_FILES = fs.readdirSync("./src/commands").filter(file => file.endsWith(".js"));
 
     const COMMANDS = COMMAND_FILES.map(file => require(`../commands/${file}`));
 
