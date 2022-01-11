@@ -4,9 +4,6 @@ const Client = new Discord.Client({ intents });
 
 Client.globalConfig = require("./config.json");
 
-Client.commands = new Discord.Collection();
-Client.slashCommands = new Discord.Collection();
-
 require("./utils/commands")(Client);
 require("./utils/events")(Client);
 
