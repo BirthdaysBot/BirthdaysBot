@@ -23,6 +23,7 @@ module.exports = {
     type: "TEXT",
     slashCommandOptions: [],
     run: async (client, message, args) => {
+        const example = "Format: !add-birthday <day, ex: 23> <month, ex: July> <year, optional>";
         const findBirthday = await Birthday.findOne({ user_id: message.author.id }).catch(error => {
             console.log(error);
 
@@ -36,10 +37,10 @@ module.exports = {
             const month = args[1];
             let year = args[2];
 
-            if (!day || isNaN(parseInt(day)) || parseInt(day) > 31) return message.reply("Please input a day. ex: 23");
-            if (!month || !months[month.toLowerCase()]) return message.reply("Please input a month. ex: July");
+            if (!day || isNaN(parseInt(day)) || parseInt(day) > 31) return message.reply(example);
+            if (!month || !months[month.toLowerCase()]) return message.reply(example);
             if (year) {
-                if (isNaN(parseInt(year))) return message.reply("The year must be a number.");
+                if (isNaN(parseInt(year))) return message.reply("The year must be a number." + "\n\n" + example);
                 if (parseInt(year) > 2022 || parseInt(year) < 1982) return message.reply("The year cannot be greater than 2022 or less than 1982.");
             } else {
                 year = "0000";
