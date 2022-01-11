@@ -9,16 +9,20 @@ module.exports = {
      * @param {Discord.Client} client The Discord client.
      */
     run: async (client) => {
-        console.log(client.user.tag + " is online!");
+        console.log(`[BOT - ${client.user.tag}] Online`);
         client.guilds.cache.forEach(guild => {
-            console.log(`${guild.name} - Members: ${guild.memberCount} Bots: ${guild.members.cache.filter(user => !user.bot).size.toLocaleString()}`);
+            console.log(`[GUILDS] ${guild.name} - Members: ${guild.memberCount} Bots: ${guild.members.cache.filter(user => !user.bot).size.toLocaleString()}`);
         });
 
         // client.application.commands.set(client.slashCommands);
 
         const dbConfig = client.globalConfig.db;
 
-        Mongoose.connect(`mongodb://${dbConfig.user}:${dbConfig.password}@${dbConfig.host}:${dbConfig.port}/${dbConfig.database}?authSource=admin`).catch(error => console.log(error));
+        Mongoose.connect(`mongodb://${dbConfig.user}:${dbConfig.password}@${dbConfig.host}:${dbConfig.port}/${dbConfig.database}?authSource=admin`)
+            .then(() => {
+                console.log(`[DATABASE] Connected`);
+            })
+            .catch(error => console.log(error));
 
         let data = {
             id: client.user.id,
@@ -36,9 +40,9 @@ module.exports = {
                 "Content-Type": "application/json"
             }
         }).then(response => {
-            console.log("DanBot API Response: " + response.data.message);
+            console.log("[DANBOT API] Response: " + response.data.message);
         }).catch(error => {
-            console.log("DanBot API Error: " + error.message);
+            console.log("[DANBOT API] Error: " + error.message);
         });
     }
 }

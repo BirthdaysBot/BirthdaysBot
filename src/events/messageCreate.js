@@ -18,6 +18,8 @@ module.exports = {
 
         if (!client.commands.get(command)) return;
 
+        console.log(`[COMMAND HANDLER - ${Date()}] Guild ID: ${message.guild.id} - User ID: ${message.author.id} - Command: ${command}`);
+
         if (["BOTH", "TEXT"].includes(client.commands.get(command).type)) {
             client.commands.get(command).run(client, message, args);
         }
