@@ -18,7 +18,7 @@ module.exports = {
 
         const dbConfig = client.globalConfig.db;
 
-        Mongoose.connect(`mongodb://${dbConfig.user}:${dbConfig.password}@${dbConfig.host}:${dbConfig.port}/${dbConfig.database}?authSource=admin`);
+        Mongoose.connect(`mongodb://${dbConfig.user}:${dbConfig.password}@${dbConfig.host}:${dbConfig.port}/${dbConfig.database}?authSource=admin`).catch(error => console.log(error));
 
         let data = {
             id: client.user.id,
