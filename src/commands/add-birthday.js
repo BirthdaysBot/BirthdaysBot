@@ -38,8 +38,8 @@ module.exports = {
 
             if (!day || isNaN(parseInt(day)) || parseInt(day) > 31) return message.reply("Please input a day. ex: 23");
             if (!month || !months[month.toLowerCase()]) return message.reply("Please input a month. ex: July");
-            if (isNaN(parseInt(year))) return message.reply("The year must be a number.");
             if (year) {
+                if (isNaN(parseInt(year))) return message.reply("The year must be a number.");
                 if (parseInt(year) > 2022 || parseInt(year) < 1982) return message.reply("The year cannot be greater than 2022 or less than 1982.");
             } else {
                 year = "0000";
