@@ -125,7 +125,7 @@ function toUpper(str) {
  * @returns An emoji or nothing.
  */
 function getBirthdayEmoji(number) {
-    if (number <= 30 && number >= 0) {
+    if (number <= 30 && number >= -1) {
         return ":birthday: ";
     } else {
         return "";
