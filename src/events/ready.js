@@ -20,7 +20,7 @@ module.exports = {
 
         const dbConfig = client.globalConfig.db;
 
-        Mongoose.connect(`mongodb://${dbConfig.user}:${encodeURIComponent(dbConfig.password)}@${dbConfig.host}:${dbConfig.port}/${dbConfig.database}?authSource=admin`)
+        await Mongoose.connect(`mongodb://${dbConfig.user}:${encodeURIComponent(dbConfig.password)}@${dbConfig.host}:${dbConfig.port}/${dbConfig.database}?authSource=admin`)
             .then(() => {
                 console.log(`[DATABASE] Connected`);
             })
