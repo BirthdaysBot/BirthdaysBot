@@ -14,11 +14,13 @@ module.exports = {
             console.log(`[GUILDS] ${guild.name} - Members: ${guild.memberCount} Bots: ${guild.members.cache.filter(user => !user.bot).size.toLocaleString()}`);
         });
 
+        client.user.setActivity({ name: "!help", type: "LISTENING" });
+
         await client.application.commands.set(client.slashCommands);
 
         const dbConfig = client.globalConfig.db;
 
-        Mongoose.connect(`mongodb://${dbConfig.user}:${dbConfig.password}@${dbConfig.host}:${dbConfig.port}/${dbConfig.database}?authSource=admin`)
+        Mongoose.connect(`mongodb://${dbConfig.user}:${encodeURIComponent(dbConfig.password)}@${dbConfig.host}:${dbConfig.port}/${dbConfig.database}?authSource=admin`)
             .then(() => {
                 console.log(`[DATABASE] Connected`);
             })
