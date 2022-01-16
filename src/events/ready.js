@@ -10,11 +10,29 @@ module.exports = {
      */
     run: async (client) => {
         console.log(`[BOT - ${client.user.tag}] Online`);
+
         client.guilds.cache.forEach(guild => {
             console.log(`[GUILDS] ${guild.name} - Members: ${guild.memberCount} Bots: ${guild.members.cache.filter(user => !user.bot).size.toLocaleString()}`);
         });
 
-        client.user.setActivity({ name: "!help", type: "LISTENING" });
+        const activities = [
+            {
+                name: "!help",
+                type: "LISTENING"
+            },
+            {
+                name: "the birthdays list grow",
+                type: "WATCHING"
+            },
+            {
+                name: "the birthdays list",
+                type: "STREAMING"
+            }
+        ];
+
+        const index = Math.floor(Math.random() * activities.length);
+
+        client.user.setActivity(activities[index]);
 
         await client.application.commands.set(client.slashCommands);
 
