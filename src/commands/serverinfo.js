@@ -13,11 +13,6 @@ module.exports = {
         embed.setDescription(`Owned by ${(async () => await message.guild.fetchOwner(member => { return member.tag }))()}`);
         embed.addFields([
             {
-                name: "Shard",
-                value: message.guild.shardId.toLocaleString(),
-                inline: true
-            },
-            {
                 name: "Members",
                 value: `${message.guild.memberCount.toLocaleString()}: Users: ${message.guild.members.cache.filter(member => !member.bot).size.toLocaleString()} Bots: ${message.guild.members.cache.filter(member => member.bot).size.toLocaleString()}`,
                 inline: false

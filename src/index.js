@@ -1,23 +1,10 @@
-const { ShardingManager } = require("discord.js");
+const Discord = require("discord.js");
+const intents = new Discord.Intents(513);
+const Client = new Discord.Client({ intents });
 
-const Config = require("./config.json");
+Client.globalConfig = require("./config.json");
 
-const Manager = new ShardingManager("./src/bot.js", { token: Config.BOT_TOKEN, totalShards: 1 });
+require("./utils/commands")(Client);
+require("./utils/events")(Client);
 
-Manager.on("shardCreate", (shard) => {
-    console.log(`[SHARD - ${shard.id}] Launched`);
-
-    shard.on("ready", () => {
-        console.log(`[SHARD - ${shard.id}] Ready`);
-    });
-
-    shard.on("error", (error) => {
-        console.log(`[SHARD - ${shard.id}] Error: ${error}`);
-    });
-
-    shard.on("disconnect", () => {
-        console.log(`[SHARD - ${shard.id}] Disconnected`);
-    });
-});
-
-Manager.spawn();
+Client.login(Client.globalConfig.BOT_TOKEN);
