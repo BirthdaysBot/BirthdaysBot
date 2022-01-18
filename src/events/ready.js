@@ -11,10 +11,6 @@ module.exports = {
     run: async (client) => {
         console.log(`[BOT - ${client.user.tag}] Online`);
 
-        client.guilds.cache.forEach(guild => {
-            console.log(`[GUILDS] ${guild.name} - Members: ${guild.memberCount} Bots: ${guild.members.cache.filter(user => !user.bot).size.toLocaleString()}`);
-        });
-
         const activities = [
             {
                 name: "!help",

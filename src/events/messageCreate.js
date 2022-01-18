@@ -16,11 +16,11 @@ module.exports = {
         const args = message.content.slice(client.globalConfig.PREFIX.length).trim().split(" ");
         const command = args.shift().toLowerCase();
 
-        if (!client.commands.get(command)) return;
+        const fetchedCommand = client.commands.get(command);
 
-        console.log(`[COMMAND HANDLER - ${Date()}] Guild ID: ${message.guild.id} - User ID: ${message.author.id} - Command: ${command}`);
+        if (!fetchedCommand) return;
 
-        if (["BOTH", "TEXT"].includes(client.commands.get(command).type)) {
+        if (["BOTH", "TEXT"].includes(fetchedCommand.type)) {
             client.commands.get(command).run(client, message, args);
         }
     }
