@@ -3,3 +3,4 @@ node_modules
 package-lock.json
 src/config.json
 src/sendEmbed.js
+src/commands/admin.js

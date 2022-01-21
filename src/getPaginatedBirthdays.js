@@ -21,29 +21,7 @@ const months = {
  * @returns A paginated list of birthdays.
  */
 module.exports = (page, per_page, birthdays, personRequesting) => {
-    let array = [];
-    let num = 0;
-
-    for (var i = 0; i < birthdays.length; i++) {
-        let birthday = birthdays[i]
-
-        const checkUndefined = (key) => {
-            if (key == undefined) return undefined;
-            else return key;
-        }
-
-        array.push({
-            user_id: birthday.user_id,
-            user_name: birthday.user_name,
-            day: birthday.day,
-            month: birthday.month,
-            year: birthday.year,
-            opted_out: checkUndefined(birthday.opted_out)
-        });
-        num++;
-    }
-
-    let bdays = array.sort((a, b) => {
+    birthdays = birthdays.sort((a, b) => {
         let n = a.month - b.month;
         if (n !== 0) {
             return n;
@@ -56,15 +34,15 @@ module.exports = (page, per_page, birthdays, personRequesting) => {
         per_page = per_page || 5,
         offset = (page - 1) * per_page,
 
-        paginatedItems = bdays.slice(offset).slice(0, per_page),
-        total_pages = Math.ceil(bdays.length / per_page);
+        paginatedItems = birthdays.slice(offset).slice(0, per_page),
+        total_pages = Math.ceil(birthdays.length / per_page);
 
     let end = {
         page: page,
         per_page: per_page,
         pre_page: page - 1 ? page - 1 : null,
         next_page: (total_pages > page) ? page + 1 : null,
-        total: bdays.length,
+        total: birthdays.length,
         total_pages: total_pages,
         data: paginatedItems
     };
