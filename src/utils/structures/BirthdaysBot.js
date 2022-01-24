@@ -71,7 +71,7 @@ class BirthdaysBot extends Client {
         for (const file of events) {
             const event = require(`../../events/${file}`);
 
-            client.on(event.name, event.run.bind(event, client));
+            this.on(event.name, event.run.bind(event, this));
         }
     }
 }
