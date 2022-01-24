@@ -1,4 +1,3 @@
-const Discord = require("discord.js");
 const Birthday = require("../models/Birthday");
 
 module.exports = {

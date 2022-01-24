@@ -1,4 +1,4 @@
-const Discord = require("discord.js");
+const { MessageEmbed } = require("discord.js");
 const Birthday = require("../models/Birthday");
 
 module.exports = {
@@ -13,12 +13,10 @@ module.exports = {
         }
 
         try {
-            let evaled;
-
             try {
-                evaled = await eval(args.join(" "));
+                const evaled = await eval(args.join(" "));
 
-                const embed = new Discord.MessageEmbed()
+                const embed = new MessageEmbed()
                     .setTitle("Evaluation")
                     .addField("Input", `${args.join(" ")}`)
                     .addField("Output", `${evaled}`)

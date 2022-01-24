@@ -1,4 +1,4 @@
-const Discord = require("discord.js");
+const { Client, Message, MessageEmbed } = require("discord.js");
 const Birthday = require("../models/Birthday");
 const getPaginatedBirthdays = require("../getPaginatedBirthdays");
 
@@ -10,8 +10,8 @@ module.exports = {
     slashCommandOptions: [],
     /**
      * 
-     * @param {Discord.Client} client The Discord client.
-     * @param {Discord.Message} message The message object.
+     * @param {Client} client The Discord client.
+     * @param {Message} message The message object.
      * @param {String[]} args The array of arguments.
      */
     run: async (client, message, args) => {
@@ -32,13 +32,12 @@ module.exports = {
 
             if (page > total_pages) page = total_pages;
 
-            const embed = new Discord.MessageEmbed();
-
-            embed.setTitle(":birthday: Birthdays List!");
-            embed.setThumbnail(client.user.avatarURL());
-            embed.setColor("RANDOM");
-            embed.setDescription(getPaginatedBirthdays(page, per_page, fetched, message.author));
-            embed.setFooter({ text: "!birthdays <page number> to see other pages!" });
+            const embed = new MessageEmbed()
+                .setTitle(":birthday: Birthdays List!")
+                .setThumbnail(client.user.avatarURL())
+                .setColor("RANDOM")
+                .setDescription(getPaginatedBirthdays(page, per_page, fetched, message.author))
+                .setFooter({ text: "!birthdays <page number> to see other pages!" })
 
             message.reply({ embeds: [embed] });
         } catch (error) {

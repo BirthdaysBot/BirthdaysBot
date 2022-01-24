@@ -1,4 +1,4 @@
-const Discord = require("discord.js");
+const { MessageEmbed } = require("discord.js");
 const Birthday = require("../models/Birthday");
 
 const months = {
@@ -61,13 +61,12 @@ module.exports = {
                         month: months[month.toLowerCase()],
                         year: parseInt(year)
                     }).save().then(document => {
-                        const embed = new Discord.MessageEmbed();
-
-                        embed.setTitle(":birthday: Birthday added!");
-                        embed.setThumbnail(client.user.avatarURL());
-                        embed.setColor("RANDOM");
-                        embed.setDescription(`A new birthday has been added to the bot for ${message.author.username}!\n\n${document.day} ${toUpper(month)}, ${document.year}`);
-                        embed.setTimestamp();
+                        const embed = new MessageEmbed()
+                            .setTitle(":birthday: Birthday added!")
+                            .setThumbnail(client.user.avatarURL())
+                            .setColor("RANDOM")
+                            .setDescription(`A new birthday has been added to the bot for ${message.author.username}!\n\n${document.day} ${toUpper(month)}, ${document.year}`)
+                            .setTimestamp()
 
                         message.reply({ embeds: [embed] });
                     }).catch(error => {

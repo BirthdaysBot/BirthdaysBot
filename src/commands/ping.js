@@ -1,4 +1,4 @@
-const Discord = require("discord.js");
+const { MessageEmbed } = require("discord.js");
 const Birthday = require("../models/Birthday");
 
 module.exports = {
@@ -13,10 +13,19 @@ module.exports = {
         await Birthday.find({}).then(() => {
             const dateAfter = Date.now();
 
-            message.reply(`:ping_pong: Pong!\n\nWebsocket Ping: ${client.ws.ping} ms\nDatabase Ping: ${dateAfter - dateNow} ms`);
+            const embed = new MessageEmbed()
+                .setTitle(":ping_pong: Pong!")
+                .setDescription(`WebSocket Ping: ${client.ws.ping} ms\nDatabase Ping: ${dateAfter - dateNow} ms`);
+
+            message.reply({ embeds: [embed] });
         }).catch(error => {
             console.log(error);
-            message.reply(`:ping_pong: Pong!\n\nWebsocket Ping: ${client.ws.ping} ms\nDatabase Ping: Error`);
+
+            const embed = new MessageEmbed()
+                .setTitle(":ping_pong: Pong!")
+                .setDescription(`WebSocket Ping: ${client.ws.ping} ms\nDatabase Ping: Error`);
+
+            message.reply({ embeds: [embed] });
         });
     }
 }

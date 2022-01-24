@@ -6,7 +6,11 @@ module.exports = {
         if (interaction.isCommand()) {
             const COMMAND_NAME = interaction.commandName;
 
-            require(`../commands/${COMMAND_NAME}`).run(client, interaction, interaction.options);
+            try {
+                require(`../commands/${COMMAND_NAME}`).run(client, interaction, interaction.options);
+            } catch (error) {
+                interaction.reply("An error occured while trying to execute the slash command.");
+            }
         }
     }
 }

@@ -1,4 +1,4 @@
-const Discord = require("discord.js");
+const { MessageEmbed, Collection } = require("discord.js");
 
 module.exports = {
     name: "help",
@@ -8,24 +8,53 @@ module.exports = {
     slashCommandOptions: [],
     run: async (client, message, args) => {
         /**
-         * @type {Discord.Collection}
+         * @type {Collection}
          */
         const commands = client.commands;
 
         let content = "";
 
-        commands.forEach(command => {
-            if (command.adminOnly == true) return;
-            content += `${client.globalConfig.PREFIX}${command.name} - ${command.description}\n`;
+        const options = args.join(' ').split(/--|—/);
+
+        const flags = [];
+
+        options.forEach(option => {
+            if (option.trim().split(' ')[0] == 'admin') {
+                flags.push("admin");
+            }
         });
 
-        const embed = new Discord.MessageEmbed();
+        if (flags.includes("admin")) {
+            const guild = client.guilds.fetch("933126721237028884");
+            const role = guild.roles.fetch("933127932359082095");
 
-        embed.setTitle(":birthday: BirthdaysBot Help Menu");
-        embed.setThumbnail(client.user.avatarURL());
-        embed.setColor("RANDOM");
-        embed.setDescription(`\`\`\`\n${content}\`\`\``);
+            if (role.members.has(message.author.id || message.user.id)) {
+                commands.forEach(command => {
+                    if (command.adminOnly != true) return;
+                    content += `${client.globalConfig.PREFIX}${command.name} - ${command.description}\n`;
+                });
 
-        message.reply({ embeds: [embed] });
+                const embed = new MessageEmbed()
+                    .setTitle(":birthday: BirthdaysBot Help Menu")
+                    .setThumbnail(client.user.avatarURL())
+                    .setColor("RANDOM")
+                    .setDescription(`\`\`\`\n${content}\`\`\``)
+
+                message.reply({ embeds: [embed] });
+            }
+        } else if (flags.length == 0) {
+            commands.forEach(command => {
+                if (command.adminOnly == true) return;
+                content += `${client.globalConfig.PREFIX}${command.name} - ${command.description}\n`;
+            });
+
+            const embed = new MessageEmbed()
+                .setTitle(":birthday: BirthdaysBot Help Menu")
+                .setThumbnail(client.user.avatarURL())
+                .setColor("RANDOM")
+                .setDescription(`\`\`\`\n${content}\`\`\``)
+
+            message.reply({ embeds: [embed] });
+        }
     }
 }

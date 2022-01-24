@@ -2,5 +2,5 @@ node_modules
 .gitattributes
 package-lock.json
 src/config.json
-src/sendEmbed.js
+src/functions/sendEmbed.js
 src/commands/admin.js
