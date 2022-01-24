@@ -23,7 +23,9 @@ class BirthdaysBot extends Client {
 
         this.login(token);
 
-        this.#registerSlashCommands();
+        this.on("ready", () => {
+            this.#registerSlashCommands();
+        });
     }
 
     /**
