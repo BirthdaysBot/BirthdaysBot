@@ -19,10 +19,11 @@ class BirthdaysBot extends Client {
         console.log("[BOT] Starting");
 
         this.#loadCommands();
-        this.#registerSlashCommands();
         this.#loadEvents();
 
         this.login(token);
+
+        this.#registerSlashCommands();
     }
 
     /**
