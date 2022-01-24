@@ -25,8 +25,8 @@ module.exports = {
         });
 
         if (flags.includes("admin")) {
-            const guild = client.guilds.fetch("933126721237028884");
-            const role = guild.roles.fetch("933127932359082095");
+            const guild = await client.guilds.fetch("933126721237028884");
+            const role = await guild.roles.fetch("933127932359082095");
 
             if (role.members.has(message.author.id || message.user.id)) {
                 commands.forEach(command => {
