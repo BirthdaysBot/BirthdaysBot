@@ -54,7 +54,7 @@ class BirthdaysBot extends Client {
      * Registers all global slash commands for the bot.
      */
     async #registerSlashCommands() {
-        await client.application.commands.set(this.slashCommands);
+        await this.application.commands.set(this.slashCommands);
     }
 
     /**
