@@ -32,7 +32,7 @@ module.exports = {
 
         const dbConfig = client.globalConfig.db;
 
-        await connectMongo(`mongodb://${dbConfig.user}:${encodeURIComponent(dbConfig.password)}@${dbConfig.host}:${dbConfig.port}/${dbCOnfig.database}?authSource=admin`);
+        await connectMongo(`mongodb://${dbConfig.user}:${encodeURIComponent(dbConfig.password)}@${dbConfig.host}:${dbConfig.port}/${dbConfig.database}?authSource=admin`);
 
         await cacheBirthdays(client);
 
