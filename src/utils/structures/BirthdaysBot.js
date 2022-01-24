@@ -30,7 +30,7 @@ class BirthdaysBot extends Client {
     #loadCommands() {
         this.commands = new Collection();
 
-        const COMMAND_FILES = fs.readdirSync("./src/commands").filter(file => file.endsWith(".js"));
+        const COMMAND_FILES = fs.readdirSync("../../src/commands").filter(file => file.endsWith(".js"));
 
         const COMMANDS = COMMAND_FILES.map(file => require(`../commands/${file}`));
 
