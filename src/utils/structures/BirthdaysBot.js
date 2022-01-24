@@ -1,5 +1,6 @@
 const { Client, Collection } = require("discord.js");
 const fs = require("fs");
+const path = require("path");
 
 class BirthdaysBot extends Client {
     /**
@@ -30,7 +31,7 @@ class BirthdaysBot extends Client {
     #loadCommands() {
         this.commands = new Collection();
 
-        const COMMAND_FILES = fs.readdirSync("../../commands").filter(file => file.endsWith(".js"));
+        const COMMAND_FILES = fs.readdirSync(path.join(__dirname, "../../commands")).filter(file => file.endsWith(".js"));
 
         const COMMANDS = COMMAND_FILES.map(file => require(`../commands/${file}`));
 
