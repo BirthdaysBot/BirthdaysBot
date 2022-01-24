@@ -10,7 +10,7 @@ module.exports = {
         const embed = new MessageEmbed();
 
         embed.setTitle(`${message.guild.name}`);
-        embed.setDescription(`Owned by ${(async () => await message.guild.fetchOwner().then(member => { return member.tag }))()}`);
+        embed.setDescription(`Owned by ${(async () => { let owner = await message.guild.fetchOwner(); return owner; })()}`);
         embed.addFields([
             {
                 name: "Members",
