@@ -30,8 +30,6 @@ module.exports = {
 
         client.user.setActivity(activities[index]);
 
-        await client.application.commands.set(client.slashCommands);
-
         const dbConfig = client.globalConfig.db;
 
         await connectMongo(`mongodb://${dbConfig.user}:${encodeURIComponent(dbConfig.password)}@${dbConfig.host}:${dbConfig.port}/${dbCOnfig.database}?authSource=admin`);
