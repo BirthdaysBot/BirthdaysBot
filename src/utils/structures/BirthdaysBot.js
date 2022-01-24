@@ -33,11 +33,11 @@ class BirthdaysBot extends Client {
 
         const COMMAND_FILES = fs.readdirSync(path.join(__dirname, "../../commands")).filter(file => file.endsWith(".js"));
 
-        const COMMANDS = COMMAND_FILES.map(file => require(`../commands/${file}`));
+        const COMMANDS = COMMAND_FILES.map(file => require(`../../commands/${file}`));
 
         COMMANDS
             .filter(command => ["BOTH", "TEXT"].includes(command.type))
-            .forEach(command => this.commands.set(command.name, require(`../commands/${command.name}`)));
+            .forEach(command => this.commands.set(command.name, require(`../../commands/${command.name}`)));
 
         this.slashCommands = COMMANDS
             .filter(command => ["BOTH", "SLASH"].includes(command.type))
@@ -66,7 +66,7 @@ class BirthdaysBot extends Client {
         const events = eventFiles.filter(file => file.endsWith(".js"));
 
         for (const file of events) {
-            const event = require(`../events/${file}`);
+            const event = require(`../../events/${file}`);
 
             client.on(event.name, event.run.bind(event, client));
         }
