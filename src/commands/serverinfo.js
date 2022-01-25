@@ -7,9 +7,10 @@ module.exports = {
     type: "BOTH",
     slashCommandOptions: [],
     run: async (client, message, args) => {
+        const owner = await message.guild.fetchOwner()
         const embed = new MessageEmbed()
             .setTitle(`${message.guild.name}`)
-            .setDescription(`Owned by ${(async () => { let owner = await message.guild.fetchOwner(); return owner; })()}`)
+            .setDescription(`Owned by ${owner.user.tag}`)
             .addFields([
                 {
                     name: "Members",
