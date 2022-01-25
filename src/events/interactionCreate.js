@@ -1,5 +1,11 @@
+const {Client, Interaction} = require("discord.js");
 module.exports = {
     name: "interactionCreate",
+    /**
+     * @param {Client} client 
+     * @param {Interaction} interaction 
+     * @param {Array} args 
+     */
     run: async (client, interaction, args) => {
         if (!interaction.inGuild()) return;
 

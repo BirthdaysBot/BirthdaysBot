@@ -9,7 +9,7 @@ module.exports = {
     run: async (client, message, args) => {
         const embed = new MessageEmbed()
             .setTitle(`${message.guild.name}`)
-            .setDescription(`Owned by ${(async () => { let owner = await message.guild.fetchOwner(); return owner; })()}`)
+            .setDescription(`Owned by ${await message.guild.fetchOwner().username}#${await message.guild.fetchOwner().discriminator}`)
             .addFields([
                 {
                     name: "Members",

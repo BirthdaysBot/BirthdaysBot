@@ -5,7 +5,6 @@ const connectMongo = require("../utils/connectMongo");
 module.exports = {
     name: "ready",
     /**
-     * 
      * @param {Client} client The Discord client.
      */
     run: async (client) => {
@@ -13,7 +12,7 @@ module.exports = {
 
         const activities = [
             {
-                name: "!help",
+                name: client.globalConfig.PREFIX + "help",
                 type: "LISTENING"
             },
             {
