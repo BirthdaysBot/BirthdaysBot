@@ -1,4 +1,6 @@
 const { Client, Interaction } = require("discord.js");
+const isSlashCommand = require("../functions/isSlashCommand");
+
 module.exports = {
     name: "interactionCreate",
     /**
@@ -12,7 +14,7 @@ module.exports = {
             const COMMAND_NAME = interaction.commandName;
 
             try {
-                require(`../commands/${COMMAND_NAME}`).run(client, interaction, interaction.options);
+                require(`../commands/${COMMAND_NAME}`).run(client, interaction, interaction.options, isSlashCommand);
             } catch (error) {
                 interaction.reply("An error occured while trying to execute the slash command.");
             }

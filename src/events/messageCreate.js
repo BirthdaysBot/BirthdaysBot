@@ -1,4 +1,5 @@
 const { Client, Message } = require("discord.js");
+const isSlashCommand = require("../functions/isSlashCommand");
 
 module.exports = {
     name: "messageCreate",
@@ -21,7 +22,7 @@ module.exports = {
         if (!fetchedCommand) return;
 
         if (["BOTH", "TEXT"].includes(fetchedCommand.type)) {
-            client.commands.get(command).run(client, message, args);
+            client.commands.get(command).run(client, message, args, isSlashCommand);
         }
     }
 }
