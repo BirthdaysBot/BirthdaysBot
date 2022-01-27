@@ -49,6 +49,7 @@ module.exports = {
             name: "flag",
             description: "The flag you want to choose.",
             required: false,
+            type: "STRING",
             choices: [
                 {
                     name: "global birthday (all servers will see this)",
