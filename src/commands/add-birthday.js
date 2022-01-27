@@ -25,7 +25,7 @@ module.exports = {
     name: "add-birthday",
     description: "Adds your birthday to the bot.",
     adminOnly: false,
-    type: "TEXT",
+    type: "BOTH",
     slashCommandOptions: [
         {
             name: "day",
