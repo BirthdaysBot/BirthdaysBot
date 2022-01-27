@@ -12,6 +12,8 @@ module.exports = {
         const owner = await guild.fetchOwner()
 
         const invite = async () => {
+            if (!guild.me.permissions.has("MANAGE_GUILD")) return "Insufficient permissions.";
+
             if (!guild.vanityURLCode) {
                 const invites = await guild.invites.fetch();
 
