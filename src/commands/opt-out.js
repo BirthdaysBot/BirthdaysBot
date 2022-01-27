@@ -1,4 +1,3 @@
-const Discord = require("discord.js");
 const Birthday = require("../models/Birthday");
 
 module.exports = {
@@ -8,6 +7,8 @@ module.exports = {
     type: "TEXT",
     slashCommandOptions: [],
     run: async (client, message, args) => {
+        if (message) return;
+
         const findBirthday = await Birthday.findOne({ user_id: message.author.id }).catch(error => {
             console.log(error);
 

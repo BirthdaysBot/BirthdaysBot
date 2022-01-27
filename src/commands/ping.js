@@ -8,22 +8,21 @@ module.exports = {
     type: "BOTH",
     slashCommandOptions: [],
     run: async (client, message, args) => {
-
         const then = Date.now();
 
-        let msg = await message.reply({ content: "Pinging...." })
+        let msg = await message.reply({ content: "Pinging..." });
 
         const ping = Math.round(Date.now() - then);
 
         const MongoThen = Date.now();
 
-        await Birthday.findOne({ userID: null })
+        await Birthday.findOne({ userID: null });
 
         const MongoPing = Math.round(Date.now() - MongoThen);
 
         const embed = new MessageEmbed()
             .setColor("GREEN")
-            .setDescription(`WS Ping: ${client.ws.ping}ms\nAPI Ping: ${ping}ms\nDatabasePing: ${MongoPing}ms`)
+            .setDescription(`WS Ping: ${client.ws.ping} ms\nAPI Ping: ${ping} ms\nDatabase Ping: ${MongoPing} ms`)
 
         message.commandName ? message.editReply({ content: " ", embeds: [embed] }) : msg.edit({ content: " ", embeds: [embed] });
     }
