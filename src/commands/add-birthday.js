@@ -112,7 +112,8 @@ module.exports = {
                             day: parseInt(day),
                             month: months[month.toLowerCase()],
                             year: parseInt(year),
-                            global_birthday: flags[flag.toLowerCase()]
+                            global_birthday: flags[flag.toLowerCase()],
+                            guild_id: message.guild.id
                         }).save().then(document => {
                             const embed = new MessageEmbed()
                                 .setTitle(":birthday: Birthday added!")
@@ -172,7 +173,8 @@ module.exports = {
                             day: parseInt(day),
                             month: months[month.toLowerCase()],
                             year: parseInt(year),
-                            global_birthday: flags[flag.toLowerCase()]
+                            global_birthday: flags[flag.toLowerCase()],
+                            guild_id: message.guild.id
                         }).save().then(document => {
                             const embed = new MessageEmbed()
                                 .setTitle(":birthday: Birthday added!")

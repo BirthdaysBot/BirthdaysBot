@@ -7,7 +7,8 @@ const BirthdaySchema = new Mongoose.Schema({
     month: { type: Mongoose.SchemaTypes.Number },
     year: { type: Mongoose.SchemaTypes.Number },
     opted_out: { type: Mongoose.SchemaTypes.Boolean, default: false },
-    global_birthday: { type: Mongoose.SchemaTypes.Boolean, default: true }
+    global_birthday: { type: Mongoose.SchemaTypes.Boolean, default: true },
+    guild_id: { type: Mongoose.SchemaTypes.String }
 });
 
 module.exports = Mongoose.model("birthday", BirthdaySchema);
