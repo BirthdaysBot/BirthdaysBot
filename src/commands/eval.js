@@ -1,7 +1,8 @@
 const { MessageEmbed } = require("discord.js");
 const Birthday = require("../models/Birthday");
+const Command = require("../utils/structures/Command");
 
-module.exports = {
+module.exports = new Command({
     name: "eval",
     description: "Evaluates code.",
     adminOnly: true,
@@ -37,4 +38,4 @@ module.exports = {
         }
 
     }
-}
+});

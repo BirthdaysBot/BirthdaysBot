@@ -1,10 +1,12 @@
 const { MessageEmbed } = require("discord.js");
 const botHasPermission = require("../functions/botHasPermission");
+const Command = require("../utils/structures/Command");
 
-module.exports = {
+module.exports = new Command({
     name: "serverinfo",
     description: "Fetches some information about the server.",
     adminOnly: false,
+    ownerOnly: false,
     type: "BOTH",
     slashCommandOptions: [],
     run: async (client, message, args) => {
@@ -62,4 +64,4 @@ module.exports = {
 
         message.reply({ embeds: [embed] });
     }
-}
+});

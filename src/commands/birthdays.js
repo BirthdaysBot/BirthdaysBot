@@ -1,11 +1,13 @@
+const Command = require("../utils/structures/Command");
 const { Client, Message, MessageEmbed } = require("discord.js");
 const Birthday = require("../models/Birthday");
 const getPaginatedBirthdays = require("../functions/getPaginatedBirthdays");
 
-module.exports = {
+module.exports = new Command({
     name: "birthdays",
     description: "Shows all the birthdays saved with the bot.",
     adminOnly: false,
+    ownerOnly: false,
     type: "TEXT",
     slashCommandOptions: [],
     /**
@@ -45,4 +47,4 @@ module.exports = {
             message.reply("An error occured, please try again later.");
         }
     }
-}
+});

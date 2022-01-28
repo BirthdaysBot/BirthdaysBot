@@ -1,9 +1,11 @@
 const Birthday = require("../models/Birthday");
+const Command = require("../utils/structures/Command");
 
-module.exports = {
+module.exports = new Command({
     name: "delete-birthday",
     description: "Deletes your birthday from the bot.",
     adminOnly: false,
+    ownerOnly: false,
     type: "TEXT",
     slashCommandOptions: [],
     run: async (client, message, args) => {
@@ -25,4 +27,4 @@ module.exports = {
             });
         }
     }
-}
+})

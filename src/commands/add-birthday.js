@@ -1,3 +1,4 @@
+const Command = require("../utils/structures/Command");
 const { Client, Message, MessageEmbed, CommandInteraction, CommandInteractionOptionResolver } = require("discord.js");
 const Birthday = require("../models/Birthday");
 
@@ -21,10 +22,11 @@ const flags = {
     "guild": false,
 }
 
-module.exports = {
+module.exports = new Command({
     name: "add-birthday",
     description: "Adds your birthday to the bot.",
     adminOnly: false,
+    ownerOnly: false,
     type: "BOTH",
     slashCommandOptions: [
         {
@@ -200,7 +202,7 @@ module.exports = {
             }
         }
     }
-}
+});
 
 /**
  * 

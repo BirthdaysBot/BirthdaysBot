@@ -1,9 +1,11 @@
 const { MessageActionRow, MessageButton } = require("discord.js");
+const Command = require("../utils/structures/Command");
 
-module.exports = {
+module.exports = new Command({
     name: "test-button",
     description: "Test Buttons",
     adminOnly: true,
+    ownerOnly: true,
     type: "TEXT",
     slashCommandOptions: [],
     run: async (client, message, args) => {
@@ -43,4 +45,4 @@ module.exports = {
 
         message.channel.send({ content: "Hello world!", components: [row] });
     }
-}
+});

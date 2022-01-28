@@ -1,9 +1,11 @@
 const Birthday = require("../models/Birthday");
+const Command = require("../utils/structures/Command");
 
-module.exports = {
+module.exports = new Command({
     name: "opt-out",
     description: "Opts your birthday out of the birthday list.",
     adminOnly: false,
+    ownerOnly: false,
     type: "TEXT",
     slashCommandOptions: [],
     run: async (client, message, args) => {
@@ -29,7 +31,7 @@ module.exports = {
             }
         }
     }
-}
+});
 
 function update(message, key, value) {
     const vals = {

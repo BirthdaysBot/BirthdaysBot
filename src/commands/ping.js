@@ -1,10 +1,12 @@
 const { MessageEmbed } = require("discord.js");
 const Birthday = require("../models/Birthday");
+const Command = require("../utils/structures/Command");
 
-module.exports = {
+module.exports = new Command({
     name: "ping",
     description: "Shows the bot's ping.",
     adminOnly: false,
+    ownerOnly: false,
     type: "BOTH",
     slashCommandOptions: [],
     run: async (client, message, args) => {
@@ -26,4 +28,4 @@ module.exports = {
 
         message.commandName ? message.editReply({ content: " ", embeds: [embed] }) : msg.edit({ content: " ", embeds: [embed] });
     }
-}
+});

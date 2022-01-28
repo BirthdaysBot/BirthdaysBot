@@ -1,9 +1,10 @@
 const { MessageEmbed, Collection } = require("discord.js");
 
-module.exports = {
+module.exports = new Command({
     name: "help",
     description: "Shows the help menu for the bot.",
     adminOnly: false,
+    ownerOnly: false,
     type: "BOTH",
     slashCommandOptions: [],
     run: async (client, message, args) => {
@@ -57,4 +58,4 @@ module.exports = {
             message.reply({ embeds: [embed] });
         }
     }
-}
+});

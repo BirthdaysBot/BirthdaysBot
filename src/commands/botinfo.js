@@ -1,10 +1,12 @@
 const Discord = require("discord.js");
 const HumanizeDuration = require("humanize-duration");
+const Command = require("../utils/structures/Command");
 
-module.exports = {
+module.exports = new Command({
     name: "botinfo",
     description: "Shows information about the bot.",
     adminOnly: false,
+    ownerOnly: false,
     type: "BOTH",
     slashCommandOptions: [],
     run: async (client, message, args) => {
@@ -33,4 +35,4 @@ module.exports = {
 
         message.reply({ embeds: [embed] });
     }
-}
+});
