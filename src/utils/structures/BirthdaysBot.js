@@ -96,7 +96,7 @@ class BirthdaysBot extends Client {
 
         const rest = new REST({ version: 9 }).setToken(this.token);
 
-        rest.put(Routes.applicationGuildCommands(this.user.id), {
+        await rest.put(Routes.applicationCommands(this.user.id), {
             body: this.contextMenus
         }).then(() => console.log("Registered context menus.")).catch(error => console.log(error));
     }
