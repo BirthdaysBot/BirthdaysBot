@@ -1,4 +1,5 @@
 const { MessageEmbed, Collection } = require("discord.js");
+const Command = require("../utils/structures/Command");
 
 module.exports = new Command({
     name: "help",
