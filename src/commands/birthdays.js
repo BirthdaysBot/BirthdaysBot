@@ -1,6 +1,6 @@
 const { Client, Message, MessageEmbed } = require("discord.js");
 const Birthday = require("../models/Birthday");
-const getPaginatedBirthdays = require("../getPaginatedBirthdays");
+const getPaginatedBirthdays = require("../functions/getPaginatedBirthdays");
 
 module.exports = {
     name: "birthdays",

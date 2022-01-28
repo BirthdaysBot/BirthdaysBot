@@ -1,18 +1,18 @@
 const { Client, Message } = require("discord.js");
 const isSlashCommand = require("../functions/isSlashCommand");
+const botHasPermission = require("../functions/botHasPermission");
 
 module.exports = {
     name: "messageCreate",
     /**
-     * 
+     * Fires when a message is sent and the bot receives it.
      * @param {Client} client The Discord client.
      * @param {Message} message The message.
-     * @returns 
      */
     run: async (client, message) => {
         if (!message.content.startsWith(client.globalConfig.PREFIX)) return;
         if (message.channel.type != "GUILD_TEXT") return;
-        if (!message.guild.me.permissions.has("SEND_MESSAGES") || !message.channel.permissionsFor(message.guild.me).has('SEND_MESSAGES')) return;
+        if (!botHasPermission(message.guild, message.channel, "SEND_MESSAGES")) return;
 
         const args = message.content.slice(client.globalConfig.PREFIX.length).trim().split(" ");
         const command = args.shift().toLowerCase();
@@ -22,6 +22,14 @@ module.exports = {
         if (!fetchedCommand) return;
 
         if (["BOTH", "TEXT"].includes(fetchedCommand.type)) {
+            /**
+             * @type {Array}
+             */
+            const ownerIds = client.globalConfig.OWNER_IDS;
+
+            if (fetchedCommand.ownerOnly && !ownerIds.includes(message.author.id)) return
+            message.reply("This command is a bot owner only command!");
+
             client.commands.get(command).run(client, message, args, isSlashCommand);
         }
     }

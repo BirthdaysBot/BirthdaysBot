@@ -1,3 +1,5 @@
+const { User } = require("discord.js");
+
 const months = {
     1: "january",
     2: "february",
@@ -14,10 +16,12 @@ const months = {
 }
 
 /**
- * 
+ * Calling this function (with the correct parameters filled in) will give you a sorted (by month and day) 
+ * list of birthdays for you to send into the channel.
  * @param {Number} page The page number you're fetching.
  * @param {Number} per_page The amount of birthdays per page.
- * @param {Array} birthdays The array of birthdays fetched from the database.
+ * @param {Array} birthdays The array of birthdays fetched from the database (or cache).
+ * @param {User} personRequesting The user who ran the command.
  * @returns A paginated list of birthdays.
  */
 module.exports = (page, per_page, birthdays, personRequesting) => {

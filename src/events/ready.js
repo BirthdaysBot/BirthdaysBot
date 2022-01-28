@@ -5,6 +5,7 @@ const connectMongo = require("../utils/connectMongo");
 module.exports = {
     name: "ready",
     /**
+     * Fires when the Discord client becomes ready.
      * @param {Client} client The Discord client.
      */
     run: async (client) => {

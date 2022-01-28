@@ -5,13 +5,10 @@ module.exports = {
     name: "eval",
     description: "Evaluates code.",
     adminOnly: true,
+    ownerOnly: true,
     type: "TEXT",
     slashCommandOptions: [],
     run: async (client, message, args) => {
-        if (message.author.id != "716761186812821604") {
-            return;
-        }
-
         if (!args[0]) {
             return message.reply("Please provide a code to evaluate.");
         }

@@ -4,6 +4,7 @@ const isSlashCommand = require("../functions/isSlashCommand");
 module.exports = {
     name: "interactionCreate",
     /**
+     * Fires when an interaction is sent and the bot receives it.
      * @param {Client} client 
      * @param {Interaction} interaction 
      */

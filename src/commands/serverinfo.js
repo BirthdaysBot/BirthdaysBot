@@ -1,4 +1,5 @@
-const { MessageEmbed } = require("discord.js")
+const { MessageEmbed } = require("discord.js");
+const botHasPermission = require("../functions/botHasPermission");
 
 module.exports = {
     name: "serverinfo",
@@ -7,12 +8,12 @@ module.exports = {
     type: "BOTH",
     slashCommandOptions: [],
     run: async (client, message, args) => {
-        const { guild } = message;
+        const { guild, channel } = message;
 
         const owner = await guild.fetchOwner()
 
         const invite = async () => {
-            if (!guild.me.permissions.has("MANAGE_GUILD")) return "Insufficient permissions.";
+            if (!botHasPermission(guild, channel, "MANAGE_GUILD")) return "Insufficient permissions. (Manage Server is required)";
 
             if (!guild.vanityURLCode) {
                 const invites = await guild.invites.fetch();
