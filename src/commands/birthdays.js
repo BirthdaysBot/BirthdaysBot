@@ -6,6 +6,7 @@ const getPaginatedBirthdays = require("../functions/getPaginatedBirthdays");
 module.exports = new Command({
     name: "birthdays",
     description: "Shows all the birthdays saved with the bot.",
+    cooldown: 3000,
     adminOnly: false,
     ownerOnly: false,
     type: "TEXT",

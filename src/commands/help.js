@@ -3,6 +3,7 @@ const { MessageEmbed, Collection } = require("discord.js");
 module.exports = new Command({
     name: "help",
     description: "Shows the help menu for the bot.",
+    cooldown: 2000,
     adminOnly: false,
     ownerOnly: false,
     type: "BOTH",

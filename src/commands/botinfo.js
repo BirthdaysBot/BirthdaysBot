@@ -5,6 +5,7 @@ const Command = require("../utils/structures/Command");
 module.exports = new Command({
     name: "botinfo",
     description: "Shows information about the bot.",
+    cooldown: 1000,
     adminOnly: false,
     ownerOnly: false,
     type: "BOTH",

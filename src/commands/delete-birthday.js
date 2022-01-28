@@ -4,6 +4,7 @@ const Command = require("../utils/structures/Command");
 module.exports = new Command({
     name: "delete-birthday",
     description: "Deletes your birthday from the bot.",
+    cooldown: 3500,
     adminOnly: false,
     ownerOnly: false,
     type: "TEXT",

@@ -4,8 +4,8 @@ const path = require("path");
 
 class BirthdaysBot extends Client {
     /**
-     * 
-     * @param {{}} options 
+     * @typedef {{intents: Number}} ClientOptions
+     * @param {ClientOptions} options 
      */
     constructor(options) {
         super({ intents: options.intents });
@@ -51,6 +51,12 @@ class BirthdaysBot extends Client {
                 options: command.slashCommandOptions,
                 defaultPermission: true
             }));
+
+        this.commandCooldowns = new Collection();
+
+        COMMANDS.forEach(command => {
+            this.commandCooldowns.set(command.name, new Collection());
+        });
     }
 
     /**

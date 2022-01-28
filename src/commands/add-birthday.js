@@ -25,6 +25,7 @@ const flags = {
 module.exports = new Command({
     name: "add-birthday",
     description: "Adds your birthday to the bot.",
+    cooldown: 5000,
     adminOnly: false,
     ownerOnly: false,
     type: "BOTH",

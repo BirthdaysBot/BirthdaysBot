@@ -5,6 +5,7 @@ const Command = require("../utils/structures/Command");
 module.exports = new Command({
     name: "ping",
     description: "Shows the bot's ping.",
+    cooldown: 3000,
     adminOnly: false,
     ownerOnly: false,
     type: "BOTH",

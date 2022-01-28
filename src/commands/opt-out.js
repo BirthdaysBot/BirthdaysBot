@@ -4,6 +4,7 @@ const Command = require("../utils/structures/Command");
 module.exports = new Command({
     name: "opt-out",
     description: "Opts your birthday out of the birthday list.",
+    cooldown: 2000,
     adminOnly: false,
     ownerOnly: false,
     type: "TEXT",

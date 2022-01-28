@@ -5,6 +5,7 @@ const Command = require("../utils/structures/Command");
 module.exports = new Command({
     name: "eval",
     description: "Evaluates code.",
+    cooldown: 1000,
     adminOnly: true,
     ownerOnly: true,
     type: "TEXT",

@@ -5,6 +5,7 @@ const Command = require("../utils/structures/Command");
 module.exports = new Command({
     name: "serverinfo",
     description: "Fetches some information about the server.",
+    cooldown: 4000,
     adminOnly: false,
     ownerOnly: false,
     type: "BOTH",
