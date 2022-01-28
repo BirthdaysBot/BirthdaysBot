@@ -1,6 +1,8 @@
-const { Client, Message } = require("discord.js");
+const { Client, Message, Collection } = require("discord.js");
+const Command = require("../utils/structures/Command");
 const isSlashCommand = require("../functions/isSlashCommand");
 const botHasPermission = require("../functions/botHasPermission");
+const HumanizeDuration = require("humanize-duration");
 
 module.exports = {
     name: "messageCreate",
@@ -17,7 +19,15 @@ module.exports = {
         const args = message.content.slice(client.globalConfig.PREFIX.length).trim().split(" ");
         const command = args.shift().toLowerCase();
 
+        /**
+         * @type {Command}
+         */
         const fetchedCommand = client.commands.get(command);
+
+        /**
+         * @type {Collection}
+         */
+        const cooldowns = client.commandCooldowns;
 
         if (!fetchedCommand) return;
 
@@ -30,7 +40,22 @@ module.exports = {
             if (fetchedCommand.ownerOnly && !ownerIds.includes(message.author.id)) return
             message.reply("This command is a bot owner only command!");
 
-            client.commands.get(command).run(client, message, args, isSlashCommand);
+            /**
+             * @type {Collection}
+             */
+            const cooldown = cooldowns.get(command);
+
+            const check = cooldown.get(message.author.id);
+
+            if (check) {
+                const time = HumanizeDuration(fetchedCommand.cooldown - check["started"], { round: true });
+
+                return message.reply(`Please wait for the command cooldown to end. ${time}`);
+            } else {
+                client.commands.get(command).run(client, message, args, isSlashCommand);
+
+                cooldown.set(message.author.id, { started: Date.now() });
+            }
         }
     }
 }
