@@ -1,3 +1,5 @@
+const { REST } = require("@discordjs/rest");
+const { Routes } = require("discord-api-types");
 const { Client, Collection } = require("discord.js");
 const fs = require("fs");
 const path = require("path");
@@ -25,6 +27,7 @@ class BirthdaysBot extends Client {
 
         this.on("ready", () => {
             this.#registerSlashCommands();
+            this.#loadContextMenus();
         });
     }
 
@@ -79,6 +82,23 @@ class BirthdaysBot extends Client {
 
             this.on(event.name, event.run.bind(event, this));
         }
+    }
+
+    async #loadContextMenus() {
+        const contextFiles = await fs.readdirSync("src/menus/context");
+
+        this.contextMenus = contextFiles
+            .filter(file => file.endsWith(".js"))
+            .map(menu => ({
+                name: menu.name,
+                type: menu.type
+            }))
+
+        const rest = new REST({ version: 9 }).setToken(this.token);
+
+        rest.put(Routes.applicationGuildCommands(this.user.id), {
+            body: this.contextMenus
+        }).then(() => console.log("Registered context menus.")).catch(error => console.log(error));
     }
 }
 
