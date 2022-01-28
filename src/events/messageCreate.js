@@ -55,6 +55,10 @@ module.exports = {
                 client.commands.get(command).run(client, message, args, isSlashCommand);
 
                 cooldown.set(message.author.id, { started: Date.now() });
+
+                setTimeout(() => {
+                    cooldown.delete(message.author.id);
+                }, fetchedCommand.cooldown);
             }
         }
     }

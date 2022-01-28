@@ -19,6 +19,8 @@ module.exports = {
             } catch (error) {
                 interaction.reply("An error occured while trying to execute the slash command.");
             }
+        } else if (interaction.isUserContextMenu()) {
+            interaction.reply("This is in testing.");
         }
     }
 }
