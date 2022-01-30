@@ -3,6 +3,7 @@
 const { Client, Collection } = require("discord.js");
 const fs = require("fs");
 const path = require("path");
+const alphalogger = require("alphalogger");
 
 class BirthdaysBot extends Client {
     /**
@@ -26,6 +27,15 @@ class BirthdaysBot extends Client {
         this.login(token);
 
         this.on("ready", () => {
+            this.logger = new alphalogger({
+                path: path.join(__dirname, "/logs"),
+                fileName: "{DATE}.log",
+                logFormat: "[{DATE} {TYPE}] {MESSAGE}",
+                logTypes: ["DEBUG", "INFO", "WARN", "ERROR"],
+                consoleLog: true,
+                logCheck: true
+            });
+
             this.#registerSlashCommands();
             // this.#loadContextMenus();
         });
