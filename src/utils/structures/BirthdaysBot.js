@@ -3,7 +3,7 @@
 const { Client, Collection } = require("discord.js");
 const fs = require("fs");
 const path = require("path");
-const Logger = require("alphalogger");
+const { Logger } = require("alphalogger");
 
 class BirthdaysBot extends Client {
     /**
