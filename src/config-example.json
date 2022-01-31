@@ -8,5 +8,6 @@
         "password": "The password to the database",
         "port": "The database port"
     },
-    "OWNER_IDS": []
+    "OWNER_IDS": [],
+    "SERVER_PORT": 0
 }
