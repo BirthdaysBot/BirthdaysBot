@@ -51,7 +51,7 @@ module.exports = {
             const check = cooldown.get(message.author.id);
 
             if (check) {
-                const time = HumanizeDuration(fetchedCommand.cooldown - check["started"], { round: true });
+                const time = HumanizeDuration(check["started"] - fetchedCommand.cooldown, { round: true });
 
                 return message.reply(`Please wait for the command cooldown to end. ${time}`);
             } else {
