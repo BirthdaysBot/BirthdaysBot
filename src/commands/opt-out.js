@@ -26,15 +26,15 @@ module.exports = new Command({
             if (!enabled || !["yes", "no"].includes(enabled)) return message.reply("Please input `yes` or `no`.");
 
             if (enabled == "yes") {
-                update(message, message.author.id, enabled);
+                update(message, message.author.id, enabled, client);
             } else if (enabled == "no") {
-                update(message, message.author.id, enabled);
+                update(message, message.author.id, enabled, client);
             }
         }
     }
 });
 
-function update(message, key, value) {
+function update(message, key, value, client) {
     const vals = {
         "yes": true,
         "no": false
@@ -47,6 +47,9 @@ function update(message, key, value) {
     }, function (error, document) {
         if (error) console.log(error);
         if (error) return message.reply("An error occured, please try again later.");
+
+        client.birthdays = client.birthdays.filter(birthday => birthday.user_id == key);
+        client.birthdays.push(document);
 
         if (value == true) {
             message.reply("You're now opted out of the birthdays list.");

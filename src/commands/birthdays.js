@@ -21,7 +21,7 @@ module.exports = new Command({
         let page = args[0] || 1;
 
         try {
-            const fetched = await Birthday.find({});
+            const fetched = client.birthdays;
             let bdays = fetched.sort((a, b) => {
                 let n = a.month - b.month;
                 if (n !== 0) {

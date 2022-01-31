@@ -37,8 +37,11 @@ module.exports = {
              */
             const ownerIds = client.globalConfig.OWNER_IDS;
 
-            if (fetchedCommand.ownerOnly && !ownerIds.includes(message.author.id)) return
-            message.reply("This command is a bot owner only command!");
+            if (fetchedCommand.ownerOnly) {
+                if (!ownerIds.includes(message.author.id)) {
+                    return message.reply("This command is a bot owner only command!");
+                }
+            }
 
             /**
              * @type {Collection}

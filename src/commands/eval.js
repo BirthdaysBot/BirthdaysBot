@@ -22,14 +22,16 @@ module.exports = new Command({
             if (typeof evaled !== "string") {
                 evaled = require("util").inspect(evaled);
             }
+            if (evaled > 1024) {
+                message.reply("Message too big to send.");
+            } else {
+                const embed = new MessageEmbed()
+                    .setColor("GREEN")
+                    .addField("Input", `\`\`\`js\n${code}\n\`\`\``)
+                    .addField("Output", `\`\`\`js\n${evaled.toString().slice(0, 1024)}\n\`\`\``)
 
-            const embed = new MessageEmbed()
-                .setColor("GREEN")
-                .addField("Input", `\`\`\`js\n${code}\n\`\`\``)
-                .addField("Output", `\`\`\`js\n${evaled.toString().slice(0, 1024)}\n\`\`\``)
-
-            message.channel.send({ embeds: [embed] });
-
+                message.channel.send({ embeds: [embed] });
+            }
         } catch (error) {
             const embed = new MessageEmbed()
                 .setColor("RED")
