@@ -2,7 +2,6 @@ const { Client, Message, Collection } = require("discord.js");
 const Command = require("../utils/structures/Command");
 const isSlashCommand = require("../functions/isSlashCommand");
 const botHasPermission = require("../functions/botHasPermission");
-const HumanizeDuration = require("humanize-duration");
 
 module.exports = {
     name: "messageCreate",
@@ -48,12 +47,10 @@ module.exports = {
              */
             const cooldown = cooldowns.get(command);
 
-            const check = cooldown.get(message.author.id);
+            const check = cooldown.has(message.author.id);
 
             if (check) {
-                const time = HumanizeDuration(check["started"] - fetchedCommand.cooldown, { round: true });
-
-                return message.reply(`Please wait for the command cooldown to end. ${time}`);
+                return;
             } else {
                 client.commands.get(command).run(client, message, args, isSlashCommand);
 
