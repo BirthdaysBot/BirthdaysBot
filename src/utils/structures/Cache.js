@@ -3,9 +3,8 @@ const EventEmitter = require("events");
 class Cache extends EventEmitter {
     constructor() {
         super({ captureRejections: true });
+        this.data = new Map();
     }
-
-    data = new Map();
 
     /**
      * Adds data to the cache.
@@ -59,11 +58,15 @@ class Cache extends EventEmitter {
     }
 
     fetchAllData() {
-        const fetched = this.data.entries();
+        const array = [];
 
-        this.emit("dataFetched", null, fetched);
+        this.data.forEach(dataset => {
+            array.push(dataset);
+        });
 
-        return fetched;
+        this.emit("dataFetched", null, array);
+
+        return array;
     }
 
     /**
