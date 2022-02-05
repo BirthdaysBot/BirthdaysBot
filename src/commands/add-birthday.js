@@ -119,7 +119,7 @@ module.exports = new Command({
                             global_birthday: flags[flag.toLowerCase()],
                             guild_id: message.guild.id
                         }).save().then(document => {
-                            client.birthdays.push(document);
+                            client.birthdays.addData(document.user_id, document);
 
                             const embed = new MessageEmbed()
                                 .setTitle(":birthday: Birthday added!")
@@ -182,7 +182,7 @@ module.exports = new Command({
                             global_birthday: flags[flag.toLowerCase()],
                             guild_id: message.guild.id
                         }).save().then(document => {
-                            client.birthdays.push(document);
+                            client.birthdays.addData(document.user_id, document);
 
                             const embed = new MessageEmbed()
                                 .setTitle(":birthday: Birthday added!")
