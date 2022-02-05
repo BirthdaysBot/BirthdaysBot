@@ -1,4 +1,5 @@
 const { Client } = require("discord.js");
+const Cache = require("../utils/structures/Cache");
 const Birthday = require("../models/Birthday");
 const connectMongo = require("../utils/connectMongo");
 
@@ -71,7 +72,11 @@ async function cacheBirthdays(client) {
     try {
         const birthdays = await Birthday.find({});
 
-        client.birthdays = birthdays;
+        client.birthdays = new Cache();
+
+        for (const birthday in birthdays) {
+            client.birthdays.addData(birthday.user_id, birthday);
+        }
     } catch (error) {
         console.log("[BOT] An error occured while attempting to cache birthdays", error);
     }
