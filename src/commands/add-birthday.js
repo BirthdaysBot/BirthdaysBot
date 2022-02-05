@@ -90,7 +90,7 @@ module.exports = new Command({
                 let year = args[2];
                 const flag = args[3] || "global";
 
-                if (!day || isNaN(parseInt(day)) || parseInt(day) > 31) return message.reply(example);
+                if (!day || isNaN(parseInt(day)) || parseInt(day) > 31 || parseInt(day) < 1) return message.reply(example);
                 if (!month || !months[month.toLowerCase()]) return message.reply(example);
                 if (year) {
                     if (isNaN(parseInt(year))) return message.reply("The year must be a number." + "\n\n" + example);
