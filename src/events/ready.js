@@ -74,9 +74,9 @@ async function cacheBirthdays(client) {
 
         client.birthdays = new Cache();
 
-        for (const birthday in birthdays) {
+        birthdays.forEach(birthday => {
             client.birthdays.addData(birthday.user_id, birthday);
-        }
+        });
     } catch (error) {
         console.log("[BOT] An error occured while attempting to cache birthdays", error);
     }
