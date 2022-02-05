@@ -1,6 +1,5 @@
 const Command = require("../utils/structures/Command");
 const { Client, Message, MessageEmbed } = require("discord.js");
-const Birthday = require("../models/Birthday");
 const getPaginatedBirthdays = require("../functions/getPaginatedBirthdays");
 
 module.exports = new Command({
@@ -21,7 +20,7 @@ module.exports = new Command({
         let page = args[0] || 1;
 
         try {
-            const fetched = client.birthdays;
+            const fetched = client.birthdays.fetchAllData();
             let bdays = fetched.sort((a, b) => {
                 let n = a.month - b.month;
                 if (n !== 0) {
